@@ -1,0 +1,20 @@
+<!doctype.html>
+<html><script>
+	function SendMessage( msg )
+	{
+		var httpRequest = new XMLHttpRequest();
+		httpRequest.onreadystatechange = function() { HandleReply(httpRequest); };  
+		httpRequest.open("GET", "/message?msg=" + msg, true);
+		httpRequest.send(null);
+	}
+
+	function HandleReply( httpRequest )
+	{
+		if( httpRequest.readyState==4 ) 
+		{
+			if( httpRequest.status==200 ) txt.innerHTML = httpRequest.responseText;
+			else txt.innerHTML = "Error: " + httpRequest.status + " " +  httpRequest.responseText;
+		}
+	}
+</script>
+</html>
